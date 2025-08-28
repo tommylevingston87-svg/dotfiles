@@ -37,8 +37,8 @@ function f {
             $file = $matches[1]
             $line = $matches[2]
 
-            # Open the file in nvim and jump directly to the correct line!
-            nvim "+$line" "$file"
+            # Open the file in VS code and jump directly to the correct line!
+            code "+$line" "$file"
         }
     }
     else {
