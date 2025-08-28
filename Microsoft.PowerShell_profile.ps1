@@ -21,9 +21,10 @@ Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete
 
 
 function f {
-    # Check if the first argument is our special flag '--rg'
-    if ($args[0] -eq '--rg') {
-        $searchTerm = $args[1]
+    # --- 1. Ripgrep Content Search (Your Correct Version) ---
+    if ($args.Count -gt 0 -and $args[0] -eq '--rg') {
+        if ($args.Length -lt 2) { Write-Host "Error: Please provide a search term after '--rg'."; return }
+        $searchTerm = $args[1..($args.Count-1)] -join ' '
         
         # Use ripgrep and pipe it to fzf, just like before.
         $selection = rg --line-number --no-heading $searchTerm $HOME | fzf
@@ -41,6 +42,23 @@ function f {
             code --goto "$file`:$line"
         }
     }
+    elseif ($args.Count -gt 0 -and $args[0] -eq '--git') {
+        # Find all .git directories, get their parent folder, and show in fzf
+        $dir = fd --type d --hidden --glob ".git" $HOME | ForEach-Object { Split-Path -Parent $_ } | fzf
+        if ($null -ne $dir) {
+            z $dir
+              }
+    }
+
+     # --- 3. NEW: Command History Search ---
+    elseif ($args.Count -gt 0 -and $args[0] -eq '--hist') {
+        $command = Get-History | Select-Object -ExpandProperty CommandLine | fzf
+        if ($null -ne $command) {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
+        }
+    }
+
+    #Directory search
     else {
         # --- This is your original code ---
         # If no '--rg' flag, just find directories like before.
