@@ -38,7 +38,7 @@ function f {
             $line = $matches[2]
 
             # Open the file in VS code and jump directly to the correct line!
-            code "+$line" "$file"
+            code --goto "$file`:$line"
         }
     }
     else {
