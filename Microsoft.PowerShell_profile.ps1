@@ -1,4 +1,3 @@
-# 1. Import Chocolatey helpers
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 
 
