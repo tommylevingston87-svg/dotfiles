@@ -67,3 +67,18 @@ function f {
         }
     }
 }
+
+function f-s {
+    # Use fd to find all files ending in .mp3 or .flac, starting from the Music folder (change path as needed)
+    $song = fd --type file -e mp3 -e flac -e m4a . "C:\Users\Owner\Music\My Music" | fzf #--preview="tree /F (Split-Path -Parent {})" --preview-window=right:40%
+
+    # If you select a song from the menu...
+    if ($null -ne $song) {
+        # Launch the selected file in VLC
+        vlc  -I dummy "$song"
+    }
+}
+#Kill vlc 
+function stop-vlc {
+    taskkill /IM vlc.exe /F
+}
