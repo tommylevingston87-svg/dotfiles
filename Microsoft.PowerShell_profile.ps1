@@ -80,5 +80,5 @@ function f-s {
 }
 #Kill vlc 
 function stop-vlc {
-    taskkill /IM vlc.exe /F
+    taskkill /IM vlc.exe /F | tte matrix
 }
