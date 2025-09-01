@@ -1,21 +1,18 @@
-  __________  __  ________    ____  ____  ______   ____________    ___________
- /_  __/ __ \/  |/  / ___/   / __ \/ __ \/_  __/  / ____/  _/ /   / ____/ ___/
-  / / / / / / /|_/ /\__ \   / / / / / / / / /    / /_   / // /   / __/  \__ \ 
- / / / /_/ / /  / /___/ /  / /_/ / /_/ / / /    / __/ _/ // /___/ /___ ___/ / 
-/_/  \____/_/  /_//____/  /_____/\____/ /_/    /_/   /___/_____/_____//____/
+
 
 #Themes
 $env:RICH_THEME = "gruvbox-dark"
 oh-my-posh init pwsh --config 'gruvbox' | Invoke-Expression
 # 1. Import Modules
-Import-Module Az.Tools.Predictor
-Import-Module -Name CompletionPredictor
+#Import-Module -Name Az.Tools.Predictor
+#Import-Module -Name CompletionPredictor
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 Import-Module Terminal-Icons
 Set-TerminalIconsTheme -ColorTheme devblackops_light
 Set-TerminalIconsTheme -IconTheme devblackops
 
-
+#2. CD to scripts
+cd C:\Users\Owner\Documents\PowerShell
 # 3. PS-ReadLine
 Set-PSReadLineOption -Colors @{
 	     "Parameter" = "Blue"
@@ -30,12 +27,12 @@ Set-PSReadLineOption -Colors @{ ListPredictionSelected = $PSStyle.Background.Gre
 Set-PSReadLineOption -HistoryNoDuplicates
 Set-PSReadlineOption -EditMode Vi
 Set-PSReadLineOption -EditMode Vi -ViModeIndicator Cursor
-Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+Set-PSReadLineOption -PredictionSource History#AndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
 . "$HOME\Documents\PowerShell\Scripts\fd_completions.ps1"
 #Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Chord Ctrl+w -Function BackwardKillWord
-Set-PSReadLineOption -MaximumHistoryCount 10000
+#Set-PSReadLineOption -MaximumHistoryCount 10000
 
 
 
